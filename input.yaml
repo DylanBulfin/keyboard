@@ -1,0 +1,171 @@
+units:
+  # Proxy Spacing Variables
+  kx: cx
+  ky: cy
+  # Padding Variables
+  px: kx + 4
+  py: ky + 4
+points:
+  key:
+  zones:
+    matrix:
+      key:
+        padding: 1ky
+        spread: 1kx
+      anchor:
+        # To make pcb fit in diagram
+        shift: [100, -100]
+      columns:
+        outer:
+          key.column_net: P02
+        pinky:
+          key.column_net: P03
+        ring:
+          key:
+            stagger: 5
+            column_net: P04
+        middle:
+          key:
+            stagger: 2.5
+            column_net: P05
+        index:
+          key:
+            stagger: -2.5
+            column_net: P06
+        inner:
+          key:
+            stagger: -2.5
+            column_net: P07
+      rows:
+        bottom:
+          row_net: P16
+        home:
+          row_net: P10
+        top:
+          row_net: P09
+        num:
+          row_net: P08
+    thumbs:
+      key:
+        padding: 1ky
+        spread: 1.15kx
+        splay: -20
+      anchor:
+        ref: matrix_inner_bottom
+        shift: [-1kx, -1.1ky]
+      columns:
+        first:
+          key:
+            rotate: 10
+            column_net: P02
+        second:
+          key:
+            rotate: 10
+            column_net: P03
+        third:
+          key:
+            rotate: 10
+            column_net: P04
+        fourth:
+          key:
+            rotate: 10
+            column_net: P05
+        fifth:
+          key:
+            rotate: 10
+            column_net: P06
+        sixth:
+          key:
+            rotate: 10
+            column_net: P07
+      rows:
+        cluster:
+          row_net: P14
+outlines:
+  raw:
+    - what: rectangle
+      where: true
+      size: [px, py]
+  keys:
+    - what: rectangle
+      where: true
+      size: [kx-0.5, ky-0.5]
+  board:
+    - what: polygon
+      operation: stack
+      points:
+        - ref: matrix_outer_num
+          shift: [-0.5px,0.5py]
+        - ref: matrix_outer_bottom
+          shift: [-0.5px,-0.5py]
+        - ref: matrix_pinky_bottom
+          shift: [1.9px,-0.5py]
+
+        - ref: thumbs_first_cluster
+          shift: [-0.5px,-0.5py]
+        - ref: thumbs_sixth_cluster
+          shift: [0.5px,-0.5py]
+        - ref: thumbs_sixth_cluster
+          shift: [0.5px,0.5py]
+        - ref: thumbs_fifth_cluster
+          shift: [0.5px,0.5py]
+        - ref: thumbs_fourth_cluster
+          shift: [0.5px,0.5py]
+
+        - ref: matrix_inner_bottom
+          shift: [1.8px,-0.5py]
+        - ref: matrix_index_num
+          shift: [1.8px+kx,0.5py]
+        - ref: matrix_index_num
+          shift: [0.5px,0.5py]
+        - ref: matrix_middle_num
+          shift: [0.5px,0.5py]
+        - ref: matrix_middle_num
+          shift: [-0.5px,0.5py]
+        - ref: matrix_ring_num
+          shift: [-0.5px,0.5py]
+      fillet: 2
+  combo:
+    - name: board
+    - operation: subtract
+      name: keys
+pcbs:
+  main:
+    outlines:
+      main:
+        outline: board
+    footprints:
+      choc_hotswap:
+        what: choc
+        where: true
+        params:
+          keycaps: true
+          reverse: false
+          hotswap: true
+          from: "{{column_net}}"
+          to: "{{colrow}}"
+      diode:
+        what: diode
+        where: true
+        params:
+          from: "{{colrow}}"
+          to: "{{row_net}}"
+        adjust:
+          shift: [0, -5]
+      promicro:
+        what: promicro
+        params:
+          orientation: "up"
+        where:
+          ref: matrix_inner_top
+          shift: [1.1px,0.5px]
+          rotate: -90
+      reset:
+        what: button
+        params:
+          from: GND
+          to: RST
+        where:
+          ref: matrix_inner_home
+          shift: [1.1px, 0]
+          rotate: 90
