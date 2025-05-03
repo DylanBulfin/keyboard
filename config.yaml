@@ -113,9 +113,9 @@ outlines:
           shift: [0.5px,0.5py]
 
         - ref: matrix_inner_bottom
-          shift: [1.8px,-0.5py]
+          shift: [1.9px,-0.5py]
         - ref: matrix_index_num
-          shift: [1.8px+kx,0.5py]
+          shift: [1.9px+kx,0.5py]
         - ref: matrix_index_num
           shift: [0.5px,0.5py]
         - ref: matrix_middle_num
@@ -152,20 +152,19 @@ pcbs:
           to: "{{row_net}}"
         adjust:
           shift: [0, -5]
-      promicro:
-        what: promicro
-        params:
-          orientation: "up"
+      nicenano:
+        what: mcu_nice_nano
         where:
           ref: matrix_inner_top
           shift: [1.1px,0.5px]
-          rotate: -90
       reset:
-        what: button
-        params:
-          from: GND
-          to: RST
+        what: reset_switch_smd_side
         where:
-          ref: matrix_inner_home
-          shift: [1.6px, 0]
+          ref: matrix_inner_num
+          shift: [1.7px,-0.3px]
           rotate: -90
+      power:
+        what: power_switch_smd_side
+        where:
+          ref: matrix_inner_num
+          shift: [1.7px, 0.3px]
