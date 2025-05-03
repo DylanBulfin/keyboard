@@ -3,3 +3,4 @@
 **/*.lck
 .session
 **/*_autosave*
+output/gerber

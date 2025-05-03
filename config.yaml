@@ -3,8 +3,8 @@ units:
   kx: cx
   ky: cy
   # Padding Variables
-  px: kx + 4
-  py: ky + 4
+  px: kx + 6
+  py: ky + 6
 points:
   key:
   zones:
@@ -17,34 +17,34 @@ points:
         shift: [100, -100]
       columns:
         outer:
-          key.column_net: P6
+          key.column_net: P2
         pinky:
-          key.column_net: P7
+          key.column_net: P3
         ring:
           key:
             stagger: 5
-            column_net: P8
+            column_net: P4
         middle:
           key:
             stagger: 2.5
-            column_net: P9
+            column_net: P5
         index:
           key:
             stagger: -2.5
-            column_net: P10
+            column_net: P6
         inner:
           key:
             stagger: -2.5
-            column_net: P16
+            column_net: P7
       rows:
         bottom:
-          row_net: P5
+          row_net: P16
         home:
-          row_net: P4
+          row_net: P10
         top:
-          row_net: P3
+          row_net: P9
         num:
-          row_net: P2
+          row_net: P8
     thumbs:
       key:
         padding: 1ky
@@ -57,27 +57,27 @@ points:
         first:
           key:
             rotate: 10
-            column_net: P6
+            column_net: P2
         second:
           key:
             rotate: 10
-            column_net: P7
+            column_net: P3
         third:
           key:
             rotate: 10
-            column_net: P8
+            column_net: P4
         fourth:
           key:
             rotate: 10
-            column_net: P9
+            column_net: P5
         fifth:
           key:
             rotate: 10
-            column_net: P10
+            column_net: P6
         sixth:
           key:
             rotate: 10
-            column_net: P16
+            column_net: P7
       rows:
         cluster:
           row_net: P14
@@ -99,7 +99,7 @@ outlines:
         - ref: matrix_outer_bottom
           shift: [-0.5px,-0.5py]
         - ref: matrix_pinky_bottom
-          shift: [1.9px,-0.5py]
+          shift: [1.6px,-0.5py]
 
         - ref: thumbs_first_cluster
           shift: [-0.5px,-0.5py]
