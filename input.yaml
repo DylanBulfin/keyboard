@@ -17,34 +17,34 @@ points:
         shift: [100, -100]
       columns:
         outer:
-          key.column_net: P2
+          key.column_net: P6
         pinky:
-          key.column_net: P3
+          key.column_net: P7
         ring:
           key:
             stagger: 5
-            column_net: P4
+            column_net: P8
         middle:
           key:
             stagger: 2.5
-            column_net: P5
+            column_net: P9
         index:
           key:
             stagger: -2.5
-            column_net: P6
+            column_net: P10
         inner:
           key:
             stagger: -2.5
-            column_net: P7
+            column_net: P16
       rows:
         bottom:
-          row_net: P16
+          row_net: P5
         home:
-          row_net: P10
+          row_net: P4
         top:
-          row_net: P9
+          row_net: P3
         num:
-          row_net: P8
+          row_net: P2
     thumbs:
       key:
         padding: 1ky
@@ -57,27 +57,27 @@ points:
         first:
           key:
             rotate: 10
-            column_net: P2
+            column_net: P6
         second:
           key:
             rotate: 10
-            column_net: P3
+            column_net: P7
         third:
           key:
             rotate: 10
-            column_net: P4
+            column_net: P8
         fourth:
           key:
             rotate: 10
-            column_net: P5
+            column_net: P9
         fifth:
           key:
             rotate: 10
-            column_net: P6
+            column_net: P10
         sixth:
           key:
             rotate: 10
-            column_net: P7
+            column_net: P16
       rows:
         cluster:
           row_net: P14
