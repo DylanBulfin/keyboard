@@ -17,34 +17,34 @@ points:
         shift: [100, -100]
       columns:
         outer:
-          key.column_net: P02
+          key.column_net: P2
         pinky:
-          key.column_net: P03
+          key.column_net: P3
         ring:
           key:
             stagger: 5
-            column_net: P04
+            column_net: P4
         middle:
           key:
             stagger: 2.5
-            column_net: P05
+            column_net: P5
         index:
           key:
             stagger: -2.5
-            column_net: P06
+            column_net: P6
         inner:
           key:
             stagger: -2.5
-            column_net: P07
+            column_net: P7
       rows:
         bottom:
           row_net: P16
         home:
           row_net: P10
         top:
-          row_net: P09
+          row_net: P9
         num:
-          row_net: P08
+          row_net: P8
     thumbs:
       key:
         padding: 1ky
@@ -57,27 +57,27 @@ points:
         first:
           key:
             rotate: 10
-            column_net: P02
+            column_net: P2
         second:
           key:
             rotate: 10
-            column_net: P03
+            column_net: P3
         third:
           key:
             rotate: 10
-            column_net: P04
+            column_net: P4
         fourth:
           key:
             rotate: 10
-            column_net: P05
+            column_net: P5
         fifth:
           key:
             rotate: 10
-            column_net: P06
+            column_net: P6
         sixth:
           key:
             rotate: 10
-            column_net: P07
+            column_net: P7
       rows:
         cluster:
           row_net: P14
@@ -167,5 +167,5 @@ pcbs:
           to: RST
         where:
           ref: matrix_inner_home
-          shift: [1.1px, 0]
-          rotate: 90
+          shift: [1.6px, 0]
+          rotate: -90
