@@ -102,7 +102,7 @@ points:
           mirror.row_net: PP7
   mirror: &mirror
     ref: matrix_inner_num
-    shift: [5px,0]
+    shift: [2px,0]
 outlines:
   raw:
     - what: rectangle
@@ -192,6 +192,7 @@ outlines:
       name: keys
 pcbs:
   main:
+    template: kicad8
     outlines:
       main:
         outline: board
