@@ -326,3 +326,17 @@ pcbs:
         where: 
           ref: mirror_matrix_inner_bottom
           shift: [0.5px, -3py]
+      text1:
+        what: utility_text
+        where: 
+          ref: mirror_matrix_inner_home
+          shift: [1.1px, 0.5py-2]
+        params:
+          text: "By Dylan Bulfin"
+      text2:
+        what: utility_text
+        where: 
+          ref: mirror_matrix_inner_home
+          shift: [1.1px, 0.5py-4]
+        params:
+          text: "using Ergogen"
