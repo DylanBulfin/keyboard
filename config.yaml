@@ -17,38 +17,50 @@ points:
         shift: [100, -100]
       columns:
         outer:
-          key.column_net: P2
+          key:
+            column_net: P2
+            mirror.column_net: MP21
         pinky:
-          key.column_net: P3
+          key:
+            column_net: P23
+            mirror.column_net: MP20
         ring:
           key:
             stagger: 5
             column_net: P4
+            mirror.column_net: MP19
         middle:
           key:
             stagger: 2.5
             column_net: P5
+            mirror.column_net: MP18
         index:
           key:
             stagger: -2.5
             column_net: P6
+            mirror.column_net: MP15
         inner:
           key:
             stagger: -2.5
             column_net: P7
+            mirror.column_net: MP14
       rows:
         bottom:
           row_net: P16
+          mirror.row_net: MP8
         home:
           row_net: P10
+          mirror.row_net: MP9
         top:
           row_net: P9
+          mirror.row_net: MP10
         num:
           row_net: P8
+          mirror.row_net: MP16
     thumbs:
       key:
         padding: 1ky
-        spread: 1.15kx
+        spread: 1.2kx
         splay: -20
       anchor:
         ref: matrix_inner_bottom
@@ -58,29 +70,39 @@ points:
           key:
             rotate: 10
             column_net: P2
+            mirror.column_net: MP21
         second:
           key:
             rotate: 10
             column_net: P3
+            mirror.column_net: MP20
         third:
           key:
             rotate: 10
             column_net: P4
+            mirror.column_net: MP19
         fourth:
           key:
             rotate: 10
             column_net: P5
+            mirror.column_net: MP18
         fifth:
           key:
             rotate: 10
             column_net: P6
+            mirror.column_net: MP15
         sixth:
           key:
             rotate: 10
             column_net: P7
+            mirror.column_net: MP14
       rows:
         cluster:
           row_net: P14
+          mirror.row_net: PP7
+  mirror: &mirror
+    ref: matrix_inner_num
+    shift: [5px,0]
 outlines:
   raw:
     - what: rectangle
@@ -90,7 +112,7 @@ outlines:
     - what: rectangle
       where: true
       size: [kx-0.5, ky-0.5]
-  board:
+  boardl:
     - what: polygon
       operation: stack
       points:
@@ -125,9 +147,48 @@ outlines:
         - ref: matrix_ring_num
           shift: [-0.5px,0.5py]
       fillet: 2
+  boardr:
+    - what: polygon
+      operation: stack
+      points:
+        - ref: mirror_matrix_outer_num
+          shift: [-0.5px,0.5py]
+        - ref: mirror_matrix_outer_bottom
+          shift: [-0.5px,-0.5py]
+        - ref: mirror_matrix_pinky_bottom
+          shift: [1.6px,-0.5py]
+
+        - ref: mirror_thumbs_first_cluster
+          shift: [-0.5px,-0.5py]
+        - ref: mirror_thumbs_sixth_cluster
+          shift: [0.5px,-0.5py]
+        - ref: mirror_thumbs_sixth_cluster
+          shift: [0.5px,0.5py]
+        - ref: mirror_thumbs_fifth_cluster
+          shift: [0.5px,0.5py]
+        - ref: mirror_thumbs_fourth_cluster
+          shift: [0.5px,0.5py]
+
+        - ref: mirror_matrix_inner_bottom
+          shift: [1.9px,-0.5py]
+        - ref: mirror_matrix_index_num
+          shift: [1.9px+kx,0.5py]
+        - ref: mirror_matrix_index_num
+          shift: [0.5px,0.5py]
+        - ref: mirror_matrix_middle_num
+          shift: [0.5px,0.5py]
+        - ref: mirror_matrix_middle_num
+          shift: [-0.5px,0.5py]
+        - ref: mirror_matrix_ring_num
+          shift: [-0.5px,0.5py]
+      fillet: 2
+  board:
+    - name: boardl
+    - operation: add
+      name: boardr
   combo:
     - name: board
-    - operation: subtract
+    - operation: add
       name: keys
 pcbs:
   main:
@@ -156,15 +217,62 @@ pcbs:
         what: mcu_nice_nano
         where:
           ref: matrix_inner_top
-          shift: [1.1px,0.5px]
+          shift: [1.1px,0.5py]
+      nicenano2:
+        what: mcu_nice_nano
+        where:
+          ref: mirror_matrix_inner_top
+          shift: [1.1px,0.5py]
+        params:
+          RAW: "MRAW"
+          GND: "MGND"
+          RST: "MRST"
+          VCC: "MVCC"
+          P21: "MP21"
+          P20: "MP20"
+          P19: "MP19"
+          P18: "MP18"
+          P15: "MP15"
+          P14: "MP14"
+          P16: "MP16"
+          P10: "MP10"
+
+          P1: "MP1"
+          P0: "MP0"
+          P2: "MP2"
+          P3: "MP3"
+          P4: "MP4"
+          P5: "MP5"
+          P6: "MP6"
+          P7: "MP7"
+          P8: "MP8"
+          P9: "MP9"
       reset:
         what: reset_switch_smd_side
         where:
           ref: matrix_inner_num
-          shift: [1.7px,-0.3px]
+          shift: [1.7px,-0.3py]
           rotate: -90
+      reset2:
+        what: reset_switch_smd_side
+        where:
+          ref: mirror_matrix_inner_num
+          shift: [1.7px, -0.3py]
+          rotate: 90
+        params:
+          from: MGND
+          to: MRST
       power:
         what: power_switch_smd_side
         where:
           ref: matrix_inner_num
-          shift: [1.7px, 0.3px]
+          shift: [1.7px, 0.3py]
+      power2:
+        what: power_switch_smd_side
+        where:
+          ref: mirror_matrix_inner_num
+          shift: [1.7px, 0.3py]
+          rotate: 180
+        params:
+          from: MBAT_P
+          to: MRAW
