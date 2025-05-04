@@ -251,13 +251,13 @@ pcbs:
         what: reset_switch_smd_side
         where:
           ref: matrix_inner_num
-          shift: [1.7px,-0.3py]
+          shift: [1.7px,-0.6py]
           rotate: -90
       reset2:
         what: reset_switch_smd_side
         where:
           ref: mirror_matrix_inner_num
-          shift: [1.7px, -0.3py]
+          shift: [1.7px, -0.6py]
           rotate: 90
         params:
           from: MGND
@@ -266,13 +266,63 @@ pcbs:
         what: power_switch_smd_side
         where:
           ref: matrix_inner_num
-          shift: [1.7px, 0.3py]
+          shift: [1.7px, 0]
       power2:
         what: power_switch_smd_side
         where:
           ref: mirror_matrix_inner_num
-          shift: [1.7px, 0.3py]
+          shift: [1.7px, 0]
           rotate: 180
         params:
           from: MBAT_P
           to: MRAW
+      top_outer_screw:
+        what: mounting_hole_plated
+        where: 
+          ref: matrix_outer_num
+          shift: [0.5kx, -0.5ky]
+      mirror_top_outer_screw:
+        what: mounting_hole_plated
+        where: 
+          ref: mirror_matrix_outer_num
+          shift: [0.5kx, -0.5ky]
+      bot_outer_screw:
+        what: mounting_hole_plated
+        where: 
+          ref: matrix_outer_bottom
+          shift: [0.5kx, 0.5ky]
+      mirror_bot_outer_screw:
+        what: mounting_hole_plated
+        where: 
+          ref: mirror_matrix_outer_bottom
+          shift: [0.5kx, 0.5ky]
+      top_inner_screw:
+        what: mounting_hole_plated
+        where: 
+          ref: matrix_inner_num
+          shift: [1.7px, 0.4py]
+      mirror_top_inner_screw:
+        what: mounting_hole_plated
+        where: 
+          ref: mirror_matrix_inner_num
+          shift: [1.7px, 0.4py]
+      center_inner_screw:
+        what: mounting_hole_plated
+        where: 
+          ref: matrix_inner_bottom
+          shift: [1px, 0]
+      mirror_center_inner_screw:
+        what: mounting_hole_plated
+        where: 
+          ref: mirror_matrix_inner_bottom
+          shift: [1px, 0]
+      bottom_inner_screw:
+        what: mounting_hole_plated
+        where: 
+          ref: matrix_inner_bottom
+          shift: [0.5px, -3py]
+      mirror_bottom_inner_screw:
+        what: mounting_hole_plated
+        where: 
+          ref: mirror_matrix_inner_bottom
+          shift: [0.5px, -3py]
