@@ -22,7 +22,7 @@ points:
             mirror.column_net: MP21
         pinky:
           key:
-            column_net: P23
+            column_net: P3
             mirror.column_net: MP20
         ring:
           key:
@@ -99,7 +99,7 @@ points:
       rows:
         cluster:
           row_net: P14
-          mirror.row_net: PP7
+          mirror.row_net: MP7
   mirror: &mirror
     ref: matrix_inner_num
     shift: [2px,0]
