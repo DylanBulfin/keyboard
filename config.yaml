@@ -5,6 +5,8 @@ units:
   # Padding Variables
   px: kx + 6
   py: ky + 6
+  epx: kx + 10
+  epy: ky + 10
 points:
   key:
   zones:
@@ -147,6 +149,40 @@ outlines:
         - ref: matrix_ring_num
           shift: [-0.5px,0.5py]
       fillet: 2
+  boardl_xl:
+    - what: polygon
+      operation: stack
+      points:
+        - ref: matrix_outer_num
+          shift: [-0.5epx,0.5epy]
+        - ref: matrix_outer_bottom
+          shift: [-0.5epx,-0.5epy]
+        - ref: matrix_pinky_bottom
+          shift: [1.6px + 2,-0.5epy]
+
+        - ref: thumbs_first_cluster
+          shift: [-0.5epx,-0.5epy]
+        - ref: thumbs_sixth_cluster
+          shift: [0.5epx,-0.5epy]
+        - ref: thumbs_sixth_cluster
+          shift: [0.5epx,0.5epy]
+        - ref: thumbs_fifth_cluster
+          shift: [0.5epx,0.5epy]
+        - ref: thumbs_fourth_cluster
+          shift: [0.5epx,0.5epy]
+
+        - ref: matrix_inner_bottom
+          shift: [1.9px + 2,-0.5epy]
+        - ref: matrix_index_num
+          shift: [1.9px + kx + 2,0.5epy]
+        - ref: matrix_index_num
+          shift: [0.5epx,0.5epy]
+        - ref: matrix_middle_num
+          shift: [0.5epx,0.5epy]
+        - ref: matrix_middle_num
+          shift: [-0.5epx,0.5epy]
+        - ref: matrix_ring_num
+          shift: [-0.5epx,0.5epy]
   boardr:
     - what: polygon
       operation: stack
@@ -182,10 +218,49 @@ outlines:
         - ref: mirror_matrix_ring_num
           shift: [-0.5px,0.5py]
       fillet: 2
+  boardr_xl:
+    - what: polygon
+      operation: stack
+      points:
+        - ref: mirror_matrix_outer_num
+          shift: [-0.5epx,0.5epy]
+        - ref: mirror_matrix_outer_bottom
+          shift: [-0.5epx,-0.5epy]
+        - ref: mirror_matrix_pinky_bottom
+          shift: [1.6px + 2,-0.5epy]
+
+        - ref: mirror_thumbs_first_cluster
+          shift: [-0.5epx,-0.5epy]
+        - ref: mirror_thumbs_sixth_cluster
+          shift: [0.5epx,-0.5epy]
+        - ref: mirror_thumbs_sixth_cluster
+          shift: [0.5epx,0.5epy]
+        - ref: mirror_thumbs_fifth_cluster
+          shift: [0.5epx,0.5epy]
+        - ref: mirror_thumbs_fourth_cluster
+          shift: [0.5epx,0.5epy]
+
+        - ref: mirror_matrix_inner_bottom
+          shift: [1.9px + 2,-0.5epy]
+        - ref: mirror_matrix_index_num
+          shift: [1.9px + kx + 2,0.5epy]
+        - ref: mirror_matrix_index_num
+          shift: [0.5epx,0.5epy]
+        - ref: mirror_matrix_middle_num
+          shift: [0.5epx,0.5epy]
+        - ref: mirror_matrix_middle_num
+          shift: [-0.5epx,0.5epy]
+        - ref: mirror_matrix_ring_num
+          shift: [-0.5epx,0.5epy]
+      fillet: 2
   board:
     - name: boardl
     - operation: add
       name: boardr
+  board_xl:
+    - name: boardl_xl
+    - operation: add
+      name: boardr_xl
   combo:
     - name: board
     - operation: add
@@ -341,3 +416,11 @@ pcbs:
           shift: [1.1px, 0.5py-4]
         params:
           text: "using Ergogen"
+cases:
+  bottom:
+    - name: board
+      extrude: 1
+  xlBottom:
+    - name: xlBoard
+      extrude: 1
+
