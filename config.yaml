@@ -7,6 +7,9 @@ units:
   py: ky + 6
   epx: kx + 10
   epy: ky + 10
+  screwSize: 1.5
+  standoffSize: 2.5
+  bareStandoffSize: 1.5
 points:
   key:
   zones:
@@ -14,9 +17,9 @@ points:
       key:
         padding: 1ky
         spread: 1kx
-      anchor:
-        # To make pcb fit in diagram
-        shift: [100, -100]
+      # anchor:
+      #   # To make pcb fit in diagram
+      #   shift: [100, -100]
       columns:
         outer:
           key:
@@ -104,7 +107,7 @@ points:
           mirror.row_net: MP7
   mirror: &mirror
     ref: matrix_inner_num
-    shift: [2px,0]
+    shift: [3px,0]
 outlines:
   raw:
     - what: rectangle
@@ -158,7 +161,7 @@ outlines:
         - ref: matrix_outer_bottom
           shift: [-0.5epx,-0.5epy]
         - ref: matrix_pinky_bottom
-          shift: [1.6px + 2,-0.5epy]
+          shift: [1.6px - 2,-0.5epy]
 
         - ref: thumbs_first_cluster
           shift: [-0.5epx,-0.5epy]
@@ -227,7 +230,7 @@ outlines:
         - ref: mirror_matrix_outer_bottom
           shift: [-0.5epx,-0.5epy]
         - ref: mirror_matrix_pinky_bottom
-          shift: [1.6px + 2,-0.5epy]
+          shift: [1.6px - 2,-0.5epy]
 
         - ref: mirror_thumbs_first_cluster
           shift: [-0.5epx,-0.5epy]
@@ -265,162 +268,395 @@ outlines:
     - name: board
     - operation: add
       name: keys
-pcbs:
-  main:
-    template: kicad8
-    outlines:
-      main:
-        outline: board
-    footprints:
-      choc_hotswap:
-        what: choc
-        where: true
-        params:
-          keycaps: true
-          reverse: false
-          hotswap: true
-          from: "{{column_net}}"
-          to: "{{colrow}}"
-      diode:
-        what: diode
-        where: true
-        params:
-          from: "{{colrow}}"
-          to: "{{row_net}}"
-        adjust:
-          shift: [0, -5]
-      nicenano:
-        what: mcu_nice_nano
-        where:
-          ref: matrix_inner_top
-          shift: [1.1px,0.5py]
-      nicenano2:
-        what: mcu_nice_nano
-        where:
-          ref: mirror_matrix_inner_top
-          shift: [1.1px,0.5py]
-        params:
-          RAW: "MRAW"
-          GND: "MGND"
-          RST: "MRST"
-          VCC: "MVCC"
-          P21: "MP21"
-          P20: "MP20"
-          P19: "MP19"
-          P18: "MP18"
-          P15: "MP15"
-          P14: "MP14"
-          P16: "MP16"
-          P10: "MP10"
-
-          P1: "MP1"
-          P0: "MP0"
-          P2: "MP2"
-          P3: "MP3"
-          P4: "MP4"
-          P5: "MP5"
-          P6: "MP6"
-          P7: "MP7"
-          P8: "MP8"
-          P9: "MP9"
-      reset:
-        what: reset_switch_smd_side
-        where:
-          ref: matrix_inner_num
-          shift: [1.7px,-0.6py]
-          rotate: -90
-      reset2:
-        what: reset_switch_smd_side
-        where:
-          ref: mirror_matrix_inner_num
-          shift: [1.7px, -0.6py]
-          rotate: 90
-        params:
-          from: MGND
-          to: MRST
-      power:
-        what: power_switch_smd_side
-        where:
-          ref: matrix_inner_num
-          shift: [1.7px, 0]
-      power2:
-        what: power_switch_smd_side
-        where:
-          ref: mirror_matrix_inner_num
-          shift: [1.7px, 0]
-          rotate: 180
-        params:
-          from: MBAT_P
-          to: MRAW
-      top_outer_screw:
-        what: mounting_hole_plated
-        where: 
-          ref: matrix_outer_num
-          shift: [0.5kx, -0.5ky]
-      mirror_top_outer_screw:
-        what: mounting_hole_plated
-        where: 
-          ref: mirror_matrix_outer_num
-          shift: [0.5kx, -0.5ky]
-      bot_outer_screw:
-        what: mounting_hole_plated
-        where: 
-          ref: matrix_outer_bottom
-          shift: [0.5kx, 0.5ky]
-      mirror_bot_outer_screw:
-        what: mounting_hole_plated
-        where: 
-          ref: mirror_matrix_outer_bottom
-          shift: [0.5kx, 0.5ky]
-      top_inner_screw:
-        what: mounting_hole_plated
-        where: 
-          ref: matrix_inner_num
-          shift: [1.7px, 0.4py]
-      mirror_top_inner_screw:
-        what: mounting_hole_plated
-        where: 
-          ref: mirror_matrix_inner_num
-          shift: [1.7px, 0.4py]
-      center_inner_screw:
-        what: mounting_hole_plated
-        where: 
-          ref: matrix_inner_bottom
-          shift: [1px, 0]
-      mirror_center_inner_screw:
-        what: mounting_hole_plated
-        where: 
-          ref: mirror_matrix_inner_bottom
-          shift: [1px, 0]
-      bottom_inner_screw:
-        what: mounting_hole_plated
-        where: 
-          ref: matrix_inner_bottom
-          shift: [0.5px, -3py]
-      mirror_bottom_inner_screw:
-        what: mounting_hole_plated
-        where: 
-          ref: mirror_matrix_inner_bottom
-          shift: [0.5px, -3py]
-      text1:
-        what: utility_text
-        where: 
-          ref: mirror_matrix_inner_home
-          shift: [1.1px, 0.5py-2]
-        params:
-          text: "By Dylan Bulfin"
-      text2:
-        what: utility_text
-        where: 
-          ref: mirror_matrix_inner_home
-          shift: [1.1px, 0.5py-4]
-        params:
-          text: "using Ergogen"
+  mountingl:
+    - what: circle
+      radius: screwSize
+      where:
+        ref: matrix_outer_num
+        shift: [0.5kx, -0.5ky]
+    - what: circle
+      radius: screwSize
+      where:
+        ref: matrix_outer_bottom
+        shift: [0.5kx, 0.5ky]
+    - what: circle
+      radius: screwSize
+      where:
+        ref: matrix_inner_num
+        shift: [1.7px, 0.4py]
+    - what: circle
+      radius: screwSize
+      where:
+        ref: matrix_inner_bottom
+        shift: [1px, 0]
+    - what: circle
+      radius: screwSize
+      where:
+        ref: matrix_inner_bottom
+        shift: [0.5px, -3py]
+  mountingr:
+    - what: circle
+      radius: screwSize
+      where:
+        ref: mirror_matrix_outer_num
+        shift: [0.5kx, -0.5ky]
+    - what: circle
+      radius: screwSize
+      where:
+        ref: mirror_matrix_outer_bottom
+        shift: [0.5kx, 0.5ky]
+    - what: circle
+      radius: screwSize
+      where:
+        ref: mirror_matrix_inner_num
+        shift: [1.7px, 0.4py]
+    - what: circle
+      radius: screwSize
+      where:
+        ref: mirror_matrix_inner_bottom
+        shift: [1px, 0]
+    - what: circle
+      radius: screwSize
+      where:
+        ref: mirror_matrix_inner_bottom
+        shift: [0.5px, -3py]
+  standoffsl:
+    - what: circle
+      radius: standoffSize
+      where:
+        ref: matrix_outer_num
+        shift: [0.5kx, -0.5ky]
+    - what: circle
+      radius: standoffSize
+      where:
+        ref: matrix_outer_bottom
+        shift: [0.5kx, 0.5ky]
+    - what: circle
+      radius: standoffSize
+      where:
+        ref: matrix_inner_num
+        shift: [1.7px, 0.4py]
+    - what: circle
+      radius: standoffSize
+      where:
+        ref: matrix_inner_bottom
+        shift: [1px, 0]
+    - what: circle
+      radius: standoffSize
+      where:
+        ref: matrix_inner_bottom
+        shift: [0.5px, -3py]
+  standoffsr:
+    - what: circle
+      radius: standoffSize
+      where:
+        ref: mirror_matrix_outer_num
+        shift: [0.5kx, -0.5ky]
+    - what: circle
+      radius: standoffSize
+      where:
+        ref: mirror_matrix_outer_bottom
+        shift: [0.5kx, 0.5ky]
+    - what: circle
+      radius: standoffSize
+      where:
+        ref: mirror_matrix_inner_num
+        shift: [1.7px, 0.4py]
+    - what: circle
+      radius: standoffSize
+      where:
+        ref: mirror_matrix_inner_bottom
+        shift: [1px, 0]
+    - what: circle
+      radius: standoffSize
+      where:
+        ref: mirror_matrix_inner_bottom
+        shift: [0.5px, -3py]
+  bare_standoffsl:
+    - what: circle
+      radius: bareStandoffSize
+      where:
+        ref: matrix_middle_num
+        shift: [0.5px, 0]
+    - what: circle
+      radius: bareStandoffSize
+      where:
+        ref: matrix_middle_bottom
+        shift: [0.5px, 0]
+    - what: circle
+      radius: bareStandoffSize
+      where:
+        ref: thumbs_second_cluster
+        shift: [1px, 0]
+    - what: circle
+      radius: bareStandoffSize
+      where:
+        ref: thumbs_sixth_cluster
+        shift: [-0.5px, -0.5py]
+  bare_standoffsr:
+    - what: circle
+      radius: bareStandoffSize
+      where:
+        ref: mirror_matrix_middle_num
+        shift: [0.5px, 0]
+    - what: circle
+      radius: bareStandoffSize
+      where:
+        ref: mirror_matrix_middle_bottom
+        shift: [0.5px, 0]
+    - what: circle
+      radius: bareStandoffSize
+      where:
+        ref: mirror_thumbs_second_cluster
+        shift: [1px, 0]
+    - what: circle
+      radius: bareStandoffSize
+      where:
+        ref: mirror_thumbs_sixth_cluster
+        shift: [-0.5px, -0.5py]
+# pcbs:
+#   main:
+#     template: kicad8
+#     outlines:
+#       main:
+#         outline: board
+#     footprints:
+#       choc_hotswap:
+#         what: choc
+#         where: true
+#         params:
+#           keycaps: true
+#           reverse: false
+#           hotswap: true
+#           from: "{{column_net}}"
+#           to: "{{colrow}}"
+#       diode:
+#         what: diode
+#         where: true
+#         params:
+#           from: "{{colrow}}"
+#           to: "{{row_net}}"
+#         adjust:
+#           shift: [0, -5]
+#       nicenano:
+#         what: mcu_nice_nano
+#         where:
+#           ref: matrix_inner_top
+#           shift: [1.1px,0.5py]
+#       nicenano2:
+#         what: mcu_nice_nano
+#         where:
+#           ref: mirror_matrix_inner_top
+#           shift: [1.1px,0.5py]
+#         params:
+#           RAW: "MRAW"
+#           GND: "MGND"
+#           RST: "MRST"
+#           VCC: "MVCC"
+#           P21: "MP21"
+#           P20: "MP20"
+#           P19: "MP19"
+#           P18: "MP18"
+#           P15: "MP15"
+#           P14: "MP14"
+#           P16: "MP16"
+#           P10: "MP10"
+#
+#           P1: "MP1"
+#           P0: "MP0"
+#           P2: "MP2"
+#           P3: "MP3"
+#           P4: "MP4"
+#           P5: "MP5"
+#           P6: "MP6"
+#           P7: "MP7"
+#           P8: "MP8"
+#           P9: "MP9"
+#       reset:
+#         what: reset_switch_smd_side
+#         where:
+#           ref: matrix_inner_num
+#           shift: [1.7px,-0.6py]
+#           rotate: -90
+#       reset2:
+#         what: reset_switch_smd_side
+#         where:
+#           ref: mirror_matrix_inner_num
+#           shift: [1.7px, -0.6py]
+#           rotate: 90
+#         params:
+#           from: MGND
+#           to: MRST
+#       power:
+#         what: power_switch_smd_side
+#         where:
+#           ref: matrix_inner_num
+#           shift: [1.7px, 0]
+#       power2:
+#         what: power_switch_smd_side
+#         where:
+#           ref: mirror_matrix_inner_num
+#           shift: [1.7px, 0]
+#           rotate: 180
+#         params:
+#           from: MBAT_P
+#           to: MRAW
+#       top_outer_screw:
+#         what: mounting_hole_plated
+#         where: 
+#           ref: matrix_outer_num
+#           shift: [0.5kx, -0.5ky]
+#       mirror_top_outer_screw:
+#         what: mounting_hole_plated
+#         where: 
+#           ref: mirror_matrix_outer_num
+#           shift: [0.5kx, -0.5ky]
+#       bot_outer_screw:
+#         what: mounting_hole_plated
+#         where: 
+#           ref: matrix_outer_bottom
+#           shift: [0.5kx, 0.5ky]
+#       mirror_bot_outer_screw:
+#         what: mounting_hole_plated
+#         where: 
+#           ref: mirror_matrix_outer_bottom
+#           shift: [0.5kx, 0.5ky]
+#       top_inner_screw:
+#         what: mounting_hole_plated
+#         where: 
+#           ref: matrix_inner_num
+#           shift: [1.7px, 0.4py]
+#       mirror_top_inner_screw:
+#         what: mounting_hole_plated
+#         where: 
+#           ref: mirror_matrix_inner_num
+#           shift: [1.7px, 0.4py]
+#       center_inner_screw:
+#         what: mounting_hole_plated
+#         where: 
+#           ref: matrix_inner_bottom
+#           shift: [1px, 0]
+#       mirror_center_inner_screw:
+#         what: mounting_hole_plated
+#         where: 
+#           ref: mirror_matrix_inner_bottom
+#           shift: [1px, 0]
+#       bottom_inner_screw:
+#         what: mounting_hole_plated
+#         where: 
+#           ref: matrix_inner_bottom
+#           shift: [0.5px, -3py]
+#       mirror_bottom_inner_screw:
+#         what: mounting_hole_plated
+#         where: 
+#           ref: mirror_matrix_inner_bottom
+#           shift: [0.5px, -3py]
+#       text1:
+#         what: utility_text
+#         where: 
+#           ref: mirror_matrix_inner_home
+#           shift: [1.1px, 0.5py-2]
+#         params:
+#           text: "By Dylan Bulfin"
+#       text2:
+#         what: utility_text
+#         where: 
+#           ref: mirror_matrix_inner_home
+#           shift: [1.1px, 0.5py-4]
+#         params:
+#           text: "using Ergogen"
 cases:
-  bottom:
-    - name: board
+  bottoml:
+    - name: boardl
       extrude: 1
-  xlBottom:
-    - name: xlBoard
+  xlBottoml:
+    - name: boardl_xl
       extrude: 1
-
+  _outerWalll:
+    - name: boardl_xl
+      extrude: 5.6
+  _innerWalll:
+    - name: boardl
+      extrude: 5.6
+  _holesl:
+    - name: mountingl
+      extrude: 4
+  _standoffsl:
+    - name: standoffsl
+      extrude: 4
+  _bare_standoffsl:
+    - name: bare_standoffsl
+      extrude: 4
+  walll:
+    - what: case
+      name: _outerWalll
+      operation: add
+    - what: case
+      name: _innerWalll
+      operation: subtract
+  mountingl:
+    - what: case
+      name: _standoffsl
+    - what: case
+      name: _holesl
+      operation: subtract
+    - what: case
+      name: _bare_standoffsl
+      operation: add
+  casel:
+    - what: case
+      name: xlBottoml
+      operation: add
+    - what: case
+      name: mountingl
+      operation: add
+    - what: case
+      name: walll
+      operation: add
+  bottomr:
+    - name: boardr
+      extrude: 1
+  xlBottomr:
+    - name: boardr_xl
+      extrude: 1
+  _outerWallr:
+    - name: boardr_xl
+      extrude: 5.6
+  _innerWallr:
+    - name: boardr
+      extrude: 5.6
+  _holesr:
+    - name: mountingr
+      extrude: 4
+  _standoffsr:
+    - name: standoffsr
+      extrude: 4
+  _bare_standoffsr:
+    - name: bare_standoffsr
+      extrude: 4
+  wallr:
+    - what: case
+      name: _outerWallr
+      operation: add
+    - what: case
+      name: _innerWallr
+      operation: subtract
+  mountingr:
+    - what: case
+      name: _standoffsr
+    - what: case
+      name: _holesr
+      operation: subtract
+    - what: case
+      name: _bare_standoffsr
+      operation: add
+  caser:
+    - what: case
+      name: xlBottomr
+      operation: add
+    - what: case
+      name: mountingr
+      operation: add
+    - what: case
+      name: wallr
+      operation: add
